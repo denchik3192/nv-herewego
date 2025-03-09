@@ -1,11 +1,11 @@
-import { FaCartShopping, FaPlus } from 'react-icons/fa6';
+import { FaCartShopping, FaPhone, FaPlus } from 'react-icons/fa6';
 import { PrismicNextLink, PrismicNextLinkProps } from '@prismicio/next';
 import clsx from 'clsx';
 
 export type ButtonProps = PrismicNextLinkProps & {
   color?: 'orange' | 'purple' | 'lime';
   size?: 'sm' | 'md' | 'lg';
-  icon?: 'cart' | 'skateboard' | 'plus';
+  icon?: 'cart' | 'skateboard' | 'plus' | 'phone';
 };
 
 export function Button({
@@ -41,6 +41,7 @@ export function Button({
             {icon === 'cart' && <FaCartShopping />}
             {icon === 'skateboard' && <SkateboardIcon />}
             {icon === 'plus' && <FaPlus />}
+            {icon === 'phone' && <FaPhone />}
           </div>
           <div className="w-px self-stretch bg-black/25" />
         </>
