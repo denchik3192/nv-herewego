@@ -1,8 +1,8 @@
 {
-  "id": "video_block",
+  "id": "team",
   "type": "SharedSlice",
-  "name": "VideoBlock",
-  "description": "VideoBlock",
+  "name": "Team",
+  "description": "Team",
   "variations": [
     {
       "id": "default",
@@ -12,11 +12,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "youtube_video_id": {
-          "type": "Text",
+        "heading": {
+          "type": "StructuredText",
           "config": {
-            "label": "YouTube Video ID",
-            "placeholder": ""
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2"
           }
         }
       },

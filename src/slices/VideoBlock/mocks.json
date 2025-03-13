@@ -2,7 +2,13 @@
 	{
 		"__TYPE__": "SharedSliceContent",
 		"variation": "default",
-		"primary": {},
+		"primary": {
+			"youtube_video_id": {
+				"__TYPE__": "FieldContent",
+				"value": "type",
+				"type": "Text"
+			}
+		},
 		"items": []
 	}
 ]

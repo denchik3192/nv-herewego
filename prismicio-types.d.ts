@@ -5,6 +5,7 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+  | TeamSlice
   | VideoBlockSlice
   | TextAndImageSlice
   | ProductGridSlice
@@ -289,11 +290,90 @@ export type SkateboardDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Skater documents
+ */
+interface SkaterDocumentData {
+  /**
+   * First Name field in *Skater*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skater.first_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  first_name: prismic.KeyTextField;
+
+  /**
+   * Last Name field in *Skater*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skater.last_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  last_name: prismic.KeyTextField;
+
+  /**
+   * Photo Backgroung field in *Skater*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skater.foto_backgroung
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  foto_backgroung: prismic.ImageField<never>;
+
+  /**
+   * Photo Foreground field in *Skater*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skater.photo_foregraund
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  photo_foregraund: prismic.ImageField<never>;
+
+  /**
+   * Customizer LInk field in *Skater*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: skater.customizer_l
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  customizer_l: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+}
+
+/**
+ * Skater document from Prismic
+ *
+ * - **API ID**: `skater`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type SkaterDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<SkaterDocumentData>, "skater", Lang>;
+
 export type AllDocumentTypes =
   | HomepageDocument
   | ProductgridDocument
   | SettingsDocument
-  | SkateboardDocument;
+  | SkateboardDocument
+  | SkaterDocument;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -438,6 +518,48 @@ export type ProductGridSlice = prismic.SharedSlice<
   "product_grid",
   ProductGridSliceVariation
 >;
+
+/**
+ * Primary content in *Team → Default → Primary*
+ */
+export interface TeamSliceDefaultPrimary {
+  /**
+   * Heading field in *Team → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team.default.primary.heading
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  heading: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Team Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Team*
+ */
+type TeamSliceVariation = TeamSliceDefault;
+
+/**
+ * Team Shared Slice
+ *
+ * - **API ID**: `team`
+ * - **Description**: Team
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSlice = prismic.SharedSlice<"team", TeamSliceVariation>;
 
 /**
  * Primary content in *TextAndImage → Default → Primary*
@@ -615,6 +737,21 @@ export type TextAndImageSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *VideoBlock → Default → Primary*
+ */
+export interface VideoBlockSliceDefaultPrimary {
+  /**
+   * YouTube Video ID field in *VideoBlock → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_block.default.primary.youtube_video_id
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  youtube_video_id: prismic.KeyTextField;
+}
+
+/**
  * Default variation for VideoBlock Slice
  *
  * - **API ID**: `default`
@@ -623,7 +760,7 @@ export type TextAndImageSlice = prismic.SharedSlice<
  */
 export type VideoBlockSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<VideoBlockSliceDefaultPrimary>,
   never
 >;
 
@@ -676,6 +813,8 @@ declare module "@prismicio/client" {
       SettingsDocumentDataNavigationItem,
       SkateboardDocument,
       SkateboardDocumentData,
+      SkaterDocument,
+      SkaterDocumentData,
       AllDocumentTypes,
       HeroSlice,
       HeroSliceDefaultPrimary,
@@ -686,6 +825,10 @@ declare module "@prismicio/client" {
       ProductGridSliceDefaultPrimary,
       ProductGridSliceVariation,
       ProductGridSliceDefault,
+      TeamSlice,
+      TeamSliceDefaultPrimary,
+      TeamSliceVariation,
+      TeamSliceDefault,
       TextAndImageSlice,
       TextAndImageSliceDefaultPrimary,
       TextAndImageSliceImageOnLeftPrimary,
@@ -693,6 +836,7 @@ declare module "@prismicio/client" {
       TextAndImageSliceDefault,
       TextAndImageSliceImageOnLeft,
       VideoBlockSlice,
+      VideoBlockSliceDefaultPrimary,
       VideoBlockSliceVariation,
       VideoBlockSliceDefault,
     };
