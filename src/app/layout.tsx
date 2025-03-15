@@ -3,6 +3,7 @@ import { Bowlby_One_SC, DM_Mono } from 'next/font/google';
 import './globals.css';
 import { Header } from './components/Header';
 import { SVGFilters } from './components/SVGFilters';
+import { Footer } from './components/Footer';
 
 const bowlby = Bowlby_One_SC({
   subsets: ['latin'],
@@ -10,7 +11,7 @@ const bowlby = Bowlby_One_SC({
   variable: '--font-bowlby-sc',
   weight: '400',
 });
-console.log(bowlby);
+
 const dmMono = DM_Mono({
   subsets: ['latin'],
   display: 'swap',
@@ -35,8 +36,9 @@ export default function RootLayout({
         <main>
           <Header />
           {children}
-          <SVGFilters />
+          <Footer />
         </main>
+        <SVGFilters />
       </body>
     </html>
   );

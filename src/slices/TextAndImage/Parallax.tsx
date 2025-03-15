@@ -2,7 +2,6 @@
 import { ImageField } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import clsx from 'clsx';
-import { log } from 'console';
 import { useEffect, useRef } from 'react';
 
 type Props = {

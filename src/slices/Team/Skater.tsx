@@ -29,11 +29,13 @@ function Skater({ skater, index }: Props) {
           field={skater.data.foto_backgroung}
           width={500}
           imgixParams={{ q: 20 }}
+          alt=''
           className="scale-110 transform transition-all duration-1000 ease-in-out group-hover:scale-100 group-hover:brightness-75 group-hover:saturate-[.80]"
         />
         <SkaterScribble className={clsx('relative', scribbleColor)} />
         <PrismicNextImage
           field={skater.data.photo_foregraund}
+          alt=''
           width={500}
           className="transform transition-transform duration-1000 ease-in-out group-hover:scale-110"
         />

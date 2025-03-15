@@ -1,9 +1,15 @@
-import { FC } from 'react';
-import { Content, isFilled } from '@prismicio/client';
-import { PrismicRichText, PrismicText, SliceComponentProps } from '@prismicio/react';
-import { Bounded } from '@/app/components/Bounded';
-import { Heading } from '@/app/components/Heading';
-import { SkateboardProduct } from './SkateboardProduct';
+import { FC } from "react";
+import { Content, isFilled } from "@prismicio/client";
+import {
+  PrismicRichText,
+  PrismicText,
+  SliceComponentProps,
+} from "@prismicio/react";
+import { Bounded } from "@/app/components/Bounded";
+import { Heading } from "@/app/components/Heading";
+import { SkateboardProduct } from "./SkateboardProduct";
+import { SlideIn } from "@/app/components/SlideIn";
+
 
 /**
  * Props for `ProductGrid`.
@@ -14,27 +20,29 @@ export type ProductGridProps = SliceComponentProps<Content.ProductGridSlice>;
  * Component for "ProductGrid" Slices.
  */
 const ProductGrid: FC<ProductGridProps> = ({ slice }) => {
-  console.log(slice.primary.product);
-
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-texture bg-brand-gray">
-      <Heading className="text-center ~mb-4/6" as="h2">
-        <PrismicText field={slice.primary.heading} />
-      </Heading>
+      className="bg-texture bg-brand-gray"
+    >
+      <SlideIn>
+        <Heading className="text-center ~mb-4/6" as="h2">
+          <PrismicText field={slice.primary.heading} />
+        </Heading>
+      </SlideIn>
 
-      <div className="text-center ~mb-6/10">
+<SlideIn><div className="text-center ~mb-6/10">
         <PrismicRichText field={slice.primary.body} />
-      </div>
+      </div></SlideIn>
+      
 
       <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {slice.primary.product.map(
           ({ skateboard }) =>
             isFilled.contentRelationship(skateboard) && (
               <SkateboardProduct key={skateboard.id} id={skateboard.id} />
-            ),
+            )
         )}
       </div>
     </Bounded>
