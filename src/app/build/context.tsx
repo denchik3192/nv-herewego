@@ -40,7 +40,6 @@ export function CustomizerControlsProvider({
 }: CustomizerControlsProviderProps) {
   const [selectedWheel, setWheel] = useState(defaultWheel);
   const [selectedDeck, setDeck] = useState(defaultDeck);
-  console.log(selectedDeck);
 
   const [selectedTruck, setTruck] = useState(defaultTruck);
   const [selectedBolt, setBolt] = useState(defaultBolt);
