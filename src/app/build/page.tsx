@@ -8,16 +8,32 @@ import { createClient } from "@/prismicio";
 import Preview from "./Preview";
 import { asImageSrc } from "@prismicio/client";
 import Controls from "./Controls";
+import Loading from "./Loading";
 
-export default async function page() {
+type searchParams = {
+  wheel?: string;
+  deck?: string;
+  truck?: string;
+  bolt?: string;
+};
+
+export default async function Page(props: {
+  searchParams: Promise<searchParams>;
+}) {
+  const searchParams = await props.searchParams;
+
   const client = createClient();
   const customizerSettings = await client.getSingle("board_customizer");
   const { wheels, decks, metals } = customizerSettings.data;
 
-  const defaultWheel = wheels[0];
-  const defaultDeck = decks[0];
-  const defaultTruck = metals[0];
-  const defaultBolts = metals[0];
+  const defaultWheel =
+    wheels.find((wheel) => wheel.uid === searchParams.wheel) ?? wheels[0];
+  const defaultDeck =
+    decks.find((deck) => deck.uid === searchParams.deck) ?? decks[0];
+  const defaultTruck =
+    metals.find((metal) => metal.uid === searchParams.truck) ?? metals[0];
+  const defaultBolts =
+    metals.find((metal) => metal.uid === searchParams.bolt) ?? metals[0];
 
   const wheelTextureURLs = wheels
     .map((texture) => asImageSrc(texture.texture))
@@ -55,18 +71,12 @@ export default async function page() {
             metals={metals}
             className="mb-6"
           />
-
-          {/* {data.wheels.map((item) => (
-  // Render the item
-))} */}
-
-          {/* <PrismicNextImage field={item.texture} /> */}
-
           <Button href="" color="lime" icon="plus">
             Add to cart
           </Button>
         </div>
       </CustomizerControlsProvider>
+      <Loading />
     </div>
   );
 }

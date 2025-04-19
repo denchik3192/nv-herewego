@@ -12,8 +12,6 @@ export function SlideIn({ children, delay = 0, duration = 0.6 }: Props) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log(entry);
-
         if (entry.isIntersecting) {
           element.style.animation = `slide-in ${duration}s ease ${delay}s forwards`;
           observer.unobserve(element);

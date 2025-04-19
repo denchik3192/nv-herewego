@@ -1,6 +1,10 @@
 import { FC } from "react";
 import { Content } from "@prismicio/client";
-import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import {
+  PrismicRichText,
+  PrismicText,
+  SliceComponentProps,
+} from "@prismicio/react";
 import { Button } from "@/app/components/Button";
 import { Heading } from "@/app/components/Heading";
 import { Bounded } from "@/app/components/Bounded";
@@ -46,7 +50,7 @@ const TextAndImage: FC<TextAndImageProps> = ({ slice, index }) => {
         >
           <SlideIn>
             <Heading size="lg" as={"h2"}>
-              <PrismicRichText field={slice.primary.heading} />
+              <PrismicText field={slice.primary.heading} />
             </Heading>
           </SlideIn>
 

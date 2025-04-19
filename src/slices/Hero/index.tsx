@@ -36,8 +36,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
     slice.primary.skateboard_truck_color || DEFAULT_TRUCK_COLOR;
   const boltColor = slice.primary.skateboard_bolt_color || DEFAULT_BOLT_COLOR;
 
-  console.log(deckTextureURL);
-
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -49,7 +47,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         <TallLogo className="w-full text-brand-purple opacity-20 mix-blend-multiply lg:hidden" />
       </div>
       <div className=" absolute inset-0 mx-auto mt-24 grid max-w-6xl grid-rows-[1fr,auto] place-items-end px-6 ~py-10/16">
-        <Heading size="lg" className="relative max-w-2xl place-self-start">
+        <Heading className="relative max-w-2xl place-self-start">
           <PrismicText field={slice.primary.heading} />
         </Heading>
         <div className="flex relative w-full flex-col items-center justify-between ~gap-2/4 lg:flex-row">
